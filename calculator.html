@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculator</title>
+<link rel="stylesheet" href="bootstrap.css">
+<script src="bootstrap.bundle.min.js"></script>
+
+<style>
+table{
+    border: 8px solid black;
+    border-collapse: collapse;
+}
+td{
+    border: 1px solid black;
+    padding: 9px;
+}
+input[type="button"]{
+    width: 100%;
+    height: 30px;
+    font-size: 18px;
+    border: none;
+    background-color: black;
+    color: white;
+}
+input[type="text"]{
+    width: 90%;
+    height: 30px;
+    font-size: 20px;
+    text-align: right;
+    padding: 10px;
+    border: 2px solid black;
+}
+</style>
+
+<script>
+function add(value) {
+    document.getElementById("display").value += value;
+}
+
+function cal() {
+    let result = document.getElementById("display").value;
+
+    try {
+        document.getElementById("display").value = eval(result);
+    } catch {
+        document.getElementById("display").value = "Error";
+    }
+}
+
+function clearDisp() {
+    document.getElementById("display").value = "";
+}
+
+function toggle() {
+    let ADV = document.getElementById("advanced");
+    if (ADV.style.display === "none") {
+        ADV.style.display = "table-row-group";
+    } else {
+        ADV.style.display = "none";
+    }
+}
+function cos() {
+    let val = document.getElementById("display").value;
+    document.getElementById("display").value = Math.cos(val);
+}
+
+function tan() {
+    let val = document.getElementById("display").value;
+    document.getElementById("display").value = Math.tan(val);
+}
+
+function sin() {
+    let val = document.getElementById("display").value;
+    document.getElementById("display").value = Math.sin(val);
+}
+function sqrt() {
+    let val = document.getElementById("display").value;
+    document.getElementById("display").value = Math.sqrt(val);
+}
+</script>
+</head>
+
+<body>
+<center>
+<table>
+
+<tr>
+    <td colspan="4">
+        <input type="text" id="display">
+    </td>
+</tr>
+
+<tr>
+    <td><input type="button" value="7" onclick="add('7')"></td>
+    <td><input type="button" value="8" onclick="add('8')"></td>
+    <td><input type="button" value="9" onclick="add('9')"></td>
+    <td><input type="button" value="/" onclick="add('/')"></td>
+</tr>
+
+<tr>
+    <td><input type="button" value="4" onclick="add('4')"></td>
+    <td><input type="button" value="5" onclick="add('5')"></td>
+    <td><input type="button" value="6" onclick="add('6')"></td>
+    <td><input type="button" value="x" onclick="add('*')"></td>
+</tr>
+
+<tr>
+    <td><input type="button" value="1" onclick="add('1')"></td>
+    <td><input type="button" value="2" onclick="add('2')"></td>
+    <td><input type="button" value="3" onclick="add('3')"></td>
+    <td><input type="button" value="-" onclick="add('-')"></td>
+</tr>
+
+<tr>
+    <td><input type="button" value="0" onclick="add('0')"></td>
+    <td><input type="button" value="." onclick="add('.')"></td>
+    <td><input type="button" value="=" onclick="cal()"></td>
+    <td><input type="button" value="+" onclick="add('+')"></td>
+</tr>
+<tr>
+    <td colspan="4">
+        <input type="button" value="ADV" onclick="toggle()">
+    </td>
+</tr>
+<tbody id="advanced" style="display:none;">
+<tr>
+    <td><input type="button" value="Sin" onclick="sin()"></td>
+    <td><input type="button" value="Cos" onclick="cos()"></td>
+    <td><input type="button" value="Tan" onclick="tan()"></td>
+    <td><input type="button" value="Sqrt" onclick="sqrt()"></td>
+</tr>
+</tbody>
+
+<tr>
+    <td colspan="4">
+        <input type="button" value="Clear" onclick="clearDisp()">
+    </td>
+</tr>
+
+</table>
+</center>
+</body>
+</html>

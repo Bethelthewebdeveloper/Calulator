@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function mult() {
+            let number = Number(prompt("Enter Your Value"))
+            let limit = Number(prompt("Enter Your Limit"))
+
+            for (let index = 1; index <= limit; index++) {
+                document.writeln(number + " X " + index + " = " + (number * index) + "<br>")
+                
+            }
+        }
+        mult()
+    </script>
+
+    <script>
+        function add() {
+            let num = Number(prompt("Enter Your Value"))
+            let lim = Number(prompt("Enter Your Limit"))
+
+            for (let index = 1; index <= lim; index++) {
+                document.writeln(num + " + " + " = " + (num + index) + "<br>")
+                
+            }
+        } 
+        add()
+    </script>
+
+    <script>
+        function sub() {
+            let Num = Number(prompt("Enter Your Value"))
+            let Lim = Number(prompt("Enter Your Limit"))
+            
+            for (let index = 1; index <= Lim; index++) {
+                document.writeln(Num + " - " + " = " + (Num - index) + "<br>")
+                
+            }
+        }
+        sub()
+    </script>
+
+    <script>
+        function div() {
+            let val = Number(prompt("Enter Your Value"))
+            let lmt = Number(prompt("Enter Your Limit"))
+
+            for (let index = 1; index <= lmt; index++) {
+                document.writeln(val +  " / " + " = " + (val / index) + "<br>");
+                
+            }
+        }
+        div()
+    </script>
+</body>
+</html>

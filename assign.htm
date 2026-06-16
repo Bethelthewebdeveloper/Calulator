@@ -1,0 +1,37 @@
+<script>
+Math = parseInt(prompt("Enter Your Score For Math"))
+English = parseInt(prompt("Enter Your Score For English"))
+Government = parseInt(prompt("Enter Your Score For Government"))
+Chemistry = parseInt(prompt("Enter Your Score For Chemistry"))
+Physics = parseInt(prompt("Enter Your Score For Physics"))
+Literature = parseInt(prompt("Enter Your Score For Literature"))
+Economics = parseInt(prompt("Enter Your Score For Economics"))
+Biology = parseInt(prompt("Enter Your Score For Biology"))
+Music = parseInt(prompt("Enter Your Score For Music"))
+
+
+Total = Math + English + Government + Chemistry + Physics + Literature + Economics + Biology + Music
+average = Total / 9
+
+document.writeln("Your Average is: " + average + "<br>")
+if (average >= 75) {
+    document.writeln("Your Grade is A1")
+}else if (average >= 70) {
+    document.writeln("Your Score is B2")
+}else if (average >= 65) {
+    document.writeln("Your Score is B3")
+}else if (average >= 60) {
+    document.writeln("Your Score is C4")
+}else if (average >= 55) {
+    document.writeln("Your Score is C5")
+}else if (average >= 50) {
+    document.writeln("Your Score is C6")
+} else if (average >=45) {
+    document.writeln("Your Score is D7")
+}else if (average >= 40) {
+    document.writeln("Your Score is E8")
+}
+else {
+    document.writeln("Your Score is F9")
+}
+</script>h

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="bootstrap.bundle.min.js"></script>
+    <style>
+    #login{
+        width: 17%;
+        padding: 15px;
+        border: 2px solid black;
+        display: block;
+    }
+</style>
+</head>
+<body>
+    <div id="login">
+        <center> <h1>LOGIN</h1>
+       UserName: <input type="text" id="UserName" placeholder="Enter Your Username"> <br><br>
+        Password: <input type="password" id="password" placeholder="Enter Your Password"> <br><br>
+       <button onclick="check()">LOGIN</button> </center>
+    </div>
+
+    <p id="message"></p>
+
+    <script>
+        let tryOut = 0
+        function check() {
+            let user = document.getElementById("UserName").value;
+            let pass = document.getElementById("password").value;
+
+            let name  = "Fedora"
+            let password  = "22222"
+
+            if (user === name && pass === password) {
+                window.location.href = "register.html"
+            } else {
+                tryOut++;
+                alert("Details Do Not Match. Chances left: " + (3 - tryOut))
+
+                if (tryOut >= 3) {
+                    alert("Too Many Attempts Made, Page is Closing...")
+                    // window.close();
+
+                    document.body.innerHTML = "<h1 style='text-align: center;'> Page Closed </h1>"
+                } 
+            }
+        }
+    </script>
+</body>
+</html>

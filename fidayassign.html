@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+</head>
+<body>
+    <h1>Currency Converter</h1>
+    <!-- <button onclick="convert()">Convert Money</button> -->
+    <script>
+        let amount = Number(prompt("Enter Amount"));
+        let fromCurrency = prompt("From Currency (USD, EUR, NGN): ").toUpperCase()
+        let toCurrency = prompt("To Currency (USD, EUR, NGN): ").toUpperCase()
+        function convert(amount, fromCurrency, toCurrency) {
+            let rate;
+
+            if (fromCurrency === "USD" && toCurrency === "NGN") {
+                rate = 1500;
+            }else if (fromCurrency === "NGN" && toCurrency === "USD") {
+                rate = 1 / 1500;
+
+            } else if (fromCurrency === "EUR" && toCurrency === "USD") {
+                rate = 1600;
+            } else if (fromCurrency === "USD" && toCurrency === "EUR") {
+                rate = 1 / 1600;
+
+            } else if (fromCurrency === "USD" && toCurrency === "EUR") {
+                rate = 1500;
+            } else if (fromCurrency === "EUR" && toCurrency === "USD") {
+                rate = 1 / 1500;
+            }
+             else if (fromCurrency === "EUR" && toCurrency === "NGN") {
+                rate = 1600;
+            } else if (fromCurrency === "NGN" && toCurrency === "EUR") {
+                rate = 1 / 1600;
+            } else {
+                return "Conversion Not Supported."
+            }
+            return amount * rate
+        } 
+        let result = convert(amount, fromCurrency, toCurrency)
+        document.writeln("Converted Amount: " + result)
+    </script>
+</body>
+</html>
