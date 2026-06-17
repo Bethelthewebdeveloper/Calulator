@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced Calculator</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    body {
+        background-color: #f4f6f9;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+    }
+    .calc-container {
+        width: 360px;
+        background-color: #212529;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    #display {
+        width: 100%;
+        height: 70px;
+        font-size: 32px;
+        text-align: right;
+        padding: 15px;
+        border: none;
+        background-color: #111;
+        color: #00ff66;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        font-family: monospace;
+    }
+    .calc-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+    }
+    input[type="button"] {
+        width: 100%;
+        height: 55px;
+        font-size: 20px;
+        font-weight: 600;
+        border: none;
+        border-radius: 10px;
+        background-color: #343a40;
+        color: white;
+        transition: all 0.1s ease;
+    }
+    input[type="button"]:hover {
+        background-color: #495057;
+    }
+    input[type="button"]:active {
+        transform: scale(0.95);
+    }
+    /* Distinct styles for different button types */
+    .btn-operator {
+        background-color: #ff9f0a !important;
+        color: white !important;
+    }
+    .btn-operator:hover {
+        background-color: #cc7f08 !important;
+    }
+    .btn-clear {
+        background-color: #dc3545 !important;
+        color: white !important;
+    }
+    .btn-clear:hover {
+        background-color: #bd2130 !important;
+    }
+    .btn-adv-toggle {
+        background-color: #0d6efd !important;
+        color: white !important;
+        grid-column: span 4;
+    }
+    .btn-adv-toggle:hover {
+        background-color: #0b5ed7 !important;
+    }
+    /* Advanced panel layout */
+    #advanced {
+        display: none;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        grid-column: span 4;
+        margin-top: 12px;
+    }
+    .btn-scientific {
+        background-color: #6c757d !important;
+    }
+    .btn-scientific:hover {
+        background-color: #5a6268 !important;
+    }
+</style>
+
+<script>
+function add(value) {
+    document.getElementById("display").value += value;
+}
+
+function clearDisp() {
+    document.getElementById("display").value = "";
+}
+
+function backspace() {
+    let display = document.getElementById("display");
+    display.value = display.value.slice(0, -1);
+}
+
+function toggle() {
+    let ADV = document.getElementById("advanced");
+    if (ADV.style.display === "none" || ADV.style.display === "") {
+        ADV.style.display = "grid";
+    } else {
+        ADV.style.display = "none";
+    }
+}
+
+function cal() {
+    let expression = document.getElementById("display").value;
+    
+    // Replace visual symbols with workable JS operators
+    expression = expression.replace(/×/g, '*').replace(/÷/g, '/');
+    
+    try {
+        // Safe evaluation mapping for '^' power operator
+        if (expression.includes('^')) {
+            let parts = expression.split('^');
+            if(parts.length === 2) {
+                expression = `Math.pow(${parts[0]}, ${parts[1]})`;
+            }
+        }
+        
+        let result = eval(expression);
+        
+        // Handle division by zero or invalid calculations smoothly
+        if (result === Infinity || isNaN(result)) {
+            document.getElementById("display").value = "Error";
+        } else {
+            // Limits massive decimals from breaking layout
+            document.getElementById("display").value = Number(result.toFixed(8)).toString();
+        }
+    } catch {
+        document.getElementById("display").value = "Error";
+    }
+}
+
+// Scientific Operations handling Degree conversions
+function sin() {
+    let val = parseFloat(document.getElementById("display").value);
+    if (!isNaN(val)) {
+        let radians = val * (Math.PI / 180);
+        document.getElementById("display").value = Number(Math.sin(radians).toFixed(8));
+    }
+}
+
+function cos() {
+    let val = parseFloat(document.getElementById("display").value);
+    if (!isNaN(val)) {
+        let radians = val * (Math.PI / 180);
+        document.getElementById("display").value = Number(Math.cos(radians).toFixed(8));
+    }
+}
+
+function tan() {
+    let val = parseFloat(document.getElementById("display").value);
+    if (!isNaN(val)) {
+        let radians = val * (Math.PI / 180);
+        document.getElementById("display").value = Number(Math.tan(radians).toFixed(8));
+    }
+}
+
+function sqrt() {
+    let val = parseFloat(document.getElementById("display").value);
+    if (!isNaN(val) && val >= 0) {
+        document.getElementById("display").value = Number(Math.sqrt(val).toFixed(8));
+    } else {
+        document.getElementById("display").value = "Error";
+    }
+}
+
+function addPi() {
+    document.getElementById("display").value += Math.PI.toFixed(6);
+}
+</script>
+</head>
+
+<body>
+
+<div class="calc-container">
+    <input type="text" id="display" readonly placeholder="0">
+
+    <div class="calc-grid">
+        <input type="button" value="C" class="btn-clear" onclick="clearDisp()">
+        <input type="button" value="(" onclick="add('(')">
+        <input type="button" value=")" onclick="add(')')">
+        <input type="button" value="⌫" class="btn-clear" onclick="backspace()">
+
+        <input type="button" value="7" onclick="add('7')">
+        <input type="button" value="8" onclick="add('8')">
+        <input type="button" value="9" onclick="add('9')">
+        <input type="button" value="÷" class="btn-operator" onclick="add('÷')">
+
+        <input type="button" value="4" onclick="add('4')">
+        <input type="button" value="5" onclick="add('5')">
+        <input type="button" value="6" onclick="add('6')">
+        <input type="button" value="×" class="btn-operator" onclick="add('×')">
+
+        <input type="button" value="1" onclick="add('1')">
+        <input type="button" value="2" onclick="add('2')">
+        <input type="button" value="3" onclick="add('3')">
+        <input type="button" value="-" class="btn-operator" onclick="add('-')">
+
+        <input type="button" value="0" onclick="add('0')">
+        <input type="button" value="." onclick="add('.')">
+        <input type="button" value="=" class="btn-operator" onclick="cal()">
+        <input type="button" value="+" class="btn-operator" onclick="add('+')">
+
+        <input type="button" value="Toggle Advanced Mode" class="btn-adv-toggle" onclick="toggle()">
+
+        <div id="advanced">
+            <input type="button" value="Sin" class="btn-scientific" onclick="sin()">
+            <input type="button" value="Cos" class="btn-scientific" onclick="cos()">
+            <input type="button" value="Tan" class="btn-scientific" onclick="tan()">
+            <input type="button" value="√" class="btn-scientific" onclick="sqrt()">
+            <input type="button" value="π" class="btn-scientific" onclick="addPi()">
+            <input type="button" value="^" class="btn-scientific" onclick="add('^')">
+            <input type="button" value="%" class="btn-scientific" onclick="add('/100')">
+            <input type="button" value="00" class="btn-scientific" onclick="add('00')">
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
